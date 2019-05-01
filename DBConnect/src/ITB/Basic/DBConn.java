@@ -69,4 +69,20 @@ public class DBConn {
 		return rs;	
 			
 	}
+	
+	public ResultSet excuteQuery(String _sql) throws SQLException
+	{
+		try {
+			String sql = _sql;
+			stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY , ResultSet.CONCUR_UPDATABLE);
+			rs = stmt.executeQuery(sql);
+						
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return rs;		
+	}
+		
+
 }

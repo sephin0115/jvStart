@@ -13,12 +13,15 @@ public class MAIN {
 		Object[] obj = new Object[1];
 		obj[0] = "1000";
 		ResultSet rs = null;
-		
+		ResultSet Qrs = null;
 		try {
 			rs = dbConn.excute("UP_ITB_JAVA_TEST_S", obj);
 			while(rs.next()) {
 				System.out.println(rs.getString("CD_COMPANY") + "|" + rs.getString("ID_USER") +"|" + rs.getString("PW"));				
 			}			
+			Qrs = dbConn.excuteQuery("SELECT * FROM ITB_JAVA_TEST");
+			rs.next();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
