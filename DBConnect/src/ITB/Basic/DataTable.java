@@ -49,7 +49,7 @@ public class DataTable extends DataTableModel{
 			rs.beforeFirst();
 			//rs.first(); //커서 위치를 첫행으로 변경
 			int iRow =0;
-			
+			System.out.println("배열생성중");
 			while(rs.next())
 			{
 				iRow = rs.getRow();
