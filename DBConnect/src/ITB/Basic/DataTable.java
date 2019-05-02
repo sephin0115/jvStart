@@ -18,6 +18,7 @@ public class DataTable extends DataTableModel{
 		return colCount;
 	}
 	public void setColCount(int colCount) {
+		//aaa
 		this.colCount = colCount;
 	}
 	
@@ -40,16 +41,16 @@ public class DataTable extends DataTableModel{
 		try {
 			rs = _rs;
 			rsmd = _rs.getMetaData();
-			rs.last(); //Ä¿¼­ÀÇ À§Ä¡¸¦ Á¦ÀÏ µÚ·Î ÀÌµ¿
-			rowCount = rs.getRow(); //ÇöÀç Ä¿¼­ÀÇ Row Index °ªÀ» ÀúÀå
+			rs.last(); //Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½ ï¿½Ìµï¿½
+			rowCount = rs.getRow(); //ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ Row Index ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			colCount = rsmd.getColumnCount();
 			colName = new String[colCount];
 			DataTable = new Object[rowCount][colCount];
 			
 			rs.beforeFirst();
-			//rs.first(); //Ä¿¼­ À§Ä¡¸¦ Ã¹ÇàÀ¸·Î º¯°æ
+			//rs.first(); //Ä¿ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int iRow =0;
-			System.out.println("¹è¿­»ý¼ºÁß");
+			System.out.println("ï¿½è¿­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			while(rs.next())
 			{
 				iRow = rs.getRow();
