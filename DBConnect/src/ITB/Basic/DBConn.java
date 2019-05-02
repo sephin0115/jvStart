@@ -50,7 +50,7 @@ public class DBConn {
 			str = str.substring(0, str.length() - 1);
 			str = str + ")}";
 			
-			ctmt = con.prepareCall(str);
+			ctmt = con.prepareCall(str,ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY );
 			// 매개변수 매핑
 			for (int i = 0 ; i < obj.length ; i++)
 			{
@@ -60,7 +60,8 @@ public class DBConn {
 			
 			
 			ctmt.execute();
-			rs = ctmt.getResultSet();			
+			rs = ctmt.getResultSet();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class DBConn {
 	{
 		try {
 			String sql = _sql;
-			stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY , ResultSet.CONCUR_UPDATABLE);
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE , ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sql);
 						
 		} catch (Exception e) {
@@ -83,6 +84,34 @@ public class DBConn {
 		}
 		return rs;		
 	}
-		
+	
+	public boolean excuteSave(String strProc , Object[] obj)
+	{
+		String str = "";
+		boolean b_save = false;
+		str = "{call " +newDB.getStrDBName() +"."+strProc+"(";
+		try {
+			// 동적으로 매개변수 선언! obj배열의 수만큼!
+			for (int i = 0 ; i < obj.length ; i++)
+			{
+				str = str + "?,";
+			}
+			str = str.substring(0, str.length() - 1);
+			str = str + ")}";
+			ctmt = con.prepareCall(str);		
+			// 매개변수 매핑
+			for (int i = 0 ; i < obj.length ; i++)
+			{
+				ctmt.setObject(i + 1, obj[i]);			
+			}
+			System.out.println(str);
+			b_save = ctmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			b_save = false;
+			e.printStackTrace();
+		}
+		return b_save;
+	}
 
 }
